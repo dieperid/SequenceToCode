@@ -9,10 +9,12 @@ classDiagram
     Title: SequenteToCode Class Diagram
     Author: DIEPERINK David
     Date: 10/12/24
-    Version: 1.0"
+    Version: 1.1"
 
     class Driver {
-        +email : string
+        +currentVehicle : Vehicle
+
+        +Driver(email:string)
         +takeAVehicle(vehicle:Vehicle) void
     }
     Driver <|-- Person
@@ -22,14 +24,18 @@ classDiagram
     }
 
     class Vehicle {
-        +chassisNumber : string
+        -chassisNumber : string
+
+        +Vehicle(chassisNumber:string)
     }
 
     class Enterprise {
-        +Enterprise()
+        -driver : Driver[]
+        -vehicles : Vehicle[]
+
         +assignVehicleToDriver(chassisNumber:string, driverEmailAdress:string) void
-        +~get~getVehicleByChassisNumber(chassisNumber:string) Vehicle
-        +~get~getDriverByEmailAddress(driverEmailAdress:string) Driver
+        -~get~getVehicleByChassisNumber(chassisNumber:string) Vehicle
+        -~get~getDriverByEmailAddress(driverEmailAdress:string) Driver
     }
 
     Vehicle <.. Enterprise

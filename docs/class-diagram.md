@@ -8,36 +8,50 @@ classDiagram
     note "Project: UML1-SequenteToCode
     Title: SequenteToCode Class Diagram
     Author: DIEPERINK David
-    Date: 10/12/24
-    Version: 1.1"
+    Date: 14/01/25
+    Version: 1.2"
 
     class Driver {
         +currentVehicle : Vehicle
 
-        +Driver(email:string)
         +takeAVehicle(vehicle:Vehicle) void
     }
-    Driver <|-- Person
 
     class Person {
-        +email : string
+        -email : string
+        +Person(email : string)
+        +~get~getEmailAddress() : string
     }
 
     class Vehicle {
         -chassisNumber : string
 
         +Vehicle(chassisNumber:string)
+        +~get~getChassisNumber() : string
     }
 
     class Enterprise {
         -driver : Driver[]
         -vehicles : Vehicle[]
 
-        +assignVehicleToDriver(chassisNumber:string, driverEmailAdress:string) void
+
         -~get~getVehicleByChassisNumber(chassisNumber:string) Vehicle
         -~get~getDriverByEmailAddress(driverEmailAdress:string) Driver
+        +assignVehicleToDriver(chassisNumber:string, driverEmailAdress:string) void
     }
 
-    Vehicle <.. Enterprise
-    Driver <.. Enterprise
+    class DriverNotFoundException { }
+
+    class VehicleNotFoundException { }
+
+    class VehicleAlreadyAssignedException { }
+
+    Enterprise o-- Vehicle
+    Enterprise o-- Driver
+    Driver --|> Person
+    Driver ..> Vehicle
+
+    VehicleAlreadyAssignedException -- Driver : throw exception
+    DriverNotFoundException -- Enterprise : throw exception
+    VehicleNotFoundException -- Enterprise : throw exception
 ```

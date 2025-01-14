@@ -8,12 +8,10 @@ try {
     $enterprise = new Enterprise();
 
     $driver = new Driver("driver1@example.com");
-    $enterprise->addDriver($driver);
 
     $vehicle = new Vehicle("123ABC");
-    $enterprise->addVehicle($vehicle);
 
-    $enterprise->assignVehicleToDriver("123ABC", "driver1@example.com");
+    $enterprise->assignVehicleToDriver($vehicle->getChassisNumber(), $driver->getEmailAddress());
 
     echo "Vehicle assigned successfully!";
 } catch (\Exception $e) {
